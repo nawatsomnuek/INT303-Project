@@ -45,7 +45,7 @@ public class CustomerServlet extends HttpServlet {
 
         Date dob = null;
         try {
-            DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
+            DateFormat df = new SimpleDateFormat("yyyy/mm/dd");
             dob = df.parse(request.getParameter("dob"));
         } catch (ParseException ex) {
             System.out.println(ex);;
