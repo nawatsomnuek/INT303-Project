@@ -29,7 +29,7 @@ public class ConnectionBuilder {
         
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:8889/BookOnlineStore", "root", "root");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/BookOnlineStore", "root", "root");
         } catch (SQLException ex) {
             System.out.println("Can't find conn");
         }
