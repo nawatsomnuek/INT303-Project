@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -36,29 +36,33 @@ public class CustomerServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String fName = request.getParameter("fName");
         String lName = request.getParameter("lName");
         String address = request.getParameter("address");
         String province = request.getParameter("province");
         String zipcode = request.getParameter("zipcode");
-        int tel = Integer.parseInt(request.getParameter("tel"));
-
+        String tel = request.getParameter("tel");
+        String dobT = request.getParameter("dob");
         Date dob = null;
         try {
-            DateFormat df = new SimpleDateFormat("yyyy/mm/dd");
-            dob = df.parse(request.getParameter("dob"));
-        } catch (ParseException ex) {
+            //DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+            dob = java.sql.Date.valueOf(dobT);
+        } catch (Exception ex) {
             System.out.println(ex);;
         }
 
         String email = request.getParameter("email");
+
         String password = request.getParameter("password");
+        //String cpw = request.getParameter("re-Password");
+
         String question = request.getParameter("question");
         String andwer = request.getParameter("answer");
-        
-        Customer c = new Customer(fName, lName, address, province, zipcode, tel, (java.sql.Date)dob, email, password, question, andwer);
-        
-        getServletContext().getRequestDispatcher("/Register").forward(request, response);
+        Customer c = new Customer(fName, lName, address, province, zipcode, tel, dob, email, password, question, andwer);
+        c.addRegis();
+
+        getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

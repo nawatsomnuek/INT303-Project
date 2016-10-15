@@ -25,7 +25,7 @@ public class Customer {
     private String custAddress;
     private String custProvince;
     private String custZipcode;
-    private int custTel;
+    private String custTel;
     private Date custDob;
     private String custEmail;
     private String custPassword;
@@ -35,7 +35,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String custFirstname, String custLastname, String custAddress, String custProvince, String custZipcode, int custTel, Date custDob, String custEmail, String custPassword, String custQuestion, String custAnswer) {
+    public Customer(String custFirstname, String custLastname, String custAddress, String custProvince, String custZipcode, String custTel,Date custDob, String custEmail, String custPassword, String custQuestion, String custAnswer) {
         this.custFirstname = custFirstname;
         this.custLastname = custLastname;
         this.custAddress = custAddress;
@@ -49,24 +49,24 @@ public class Customer {
         this.custAnswer = custAnswer;
     }
 
-    public static void addRegis (){
+    public void addRegis (){
         Connection conn = ConnectionBuilder.connect();
-        Customer c = new Customer();
         
-        final String SQL_INSERT_REGIS = "INSERT INTO customer VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        final String SQL_INSERT_REGIS = "INSERT INTO customers(custFirstName, custLastName, custAddress, custProvince, custZipcode, custTel, custDob, custEmail, custPassword, custQuestion, custAnswer) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        
         try {
             PreparedStatement pstm = conn.prepareStatement(SQL_INSERT_REGIS);
-            pstm.setString(1, c.getCustFirstname());
-            pstm.setString(2, c.getCustLastname());
-            pstm.setString(3, c.getCustAddress());
-            pstm.setString(4, c.getCustProvince());
-            pstm.setString(5, c.getCustZipcode());
-            pstm.setInt(6, c.getCustTel());
-            pstm.setDate(7, c.getCustDob());
-            pstm.setString(8, c.getCustEmail());
-            pstm.setString(9, c.getCustPassword());
-            pstm.setString(10, c.getCustQuestion());
-            pstm.setString(11, c.getCustAnswer());
+            pstm.setString(1, this.getCustFirstname());
+            pstm.setString(2, this.getCustLastname());
+            pstm.setString(3, this.getCustAddress());
+            pstm.setString(4, this.getCustProvince());
+            pstm.setString(5, this.getCustZipcode());
+            pstm.setString(6, this.getCustTel());
+            pstm.setDate(7, this.getCustDob());
+            pstm.setString(8, this.getCustEmail());
+            pstm.setString(9, this.getCustPassword());
+            pstm.setString(10, this.getCustQuestion());
+            pstm.setString(11, this.getCustAnswer());
             
             pstm.executeUpdate();
             pstm.close();
@@ -123,11 +123,11 @@ public class Customer {
         this.custZipcode = custZipcode;
     }
 
-    public int getCustTel() {
+    public String getCustTel() {
         return custTel;
     }
 
-    public void setCustTel(int custTel) {
+    public void setCustTel(String custTel) {
         this.custTel = custTel;
     }
 
